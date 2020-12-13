@@ -1,0 +1,50 @@
+屏幕大小：(1920, 1128)
+screenWidth(dp)：1280
+screenWidth(sp)：1280
+
+存储空间：总共：51.9 GB，剩余：47.6 GB
+内存：总共：4 GB，剩余：2.3 GB
+
+厂商：hra
+型号：G6
+版本号：HRA_G6_201909091415
+Android 版本：9
+SDK 版本：28
+Serial(设备号)：0123456789ABCDEF
+IMEI：353769225008454
+ANDROID_ID：5d3d1716414c9f03
+
+BOARD = hra
+BOOTLOADER = unknown
+BRAND = hra
+CPU_ABI = arm64-v8a
+CPU_ABI2 = 
+DEVICE = G6
+DISPLAY = HRA_G6_201909091415
+FINGERPRINT = alps/full_tb8788p1_64_bsp/tb8788p1_64_bsp:9/PPR1.180610.011/hra_xzy09091409:userdebug/test-keys
+HARDWARE = mt8788
+HOST = hra
+ID = PPR1.180610.011
+IS_CONTAINER = false
+IS_DEBUGGABLE = true
+IS_EMULATOR = false
+IS_ENG = false
+IS_TREBLE_ENABLED = true
+IS_USER = false
+IS_USERDEBUG = true
+MANUFACTURER = hra
+MODEL = G6
+PERMISSIONS_REVIEW_REQUIRED = false
+PRODUCT = G6
+RADIO = unknown
+SERIAL = 0123456789ABCDEF
+SUPPORTED_32_BIT_ABIS = [Ljava.lang.String;@14de630
+SUPPORTED_64_BIT_ABIS = [Ljava.lang.String;@36dd2a9
+SUPPORTED_ABIS = [Ljava.lang.String;@3a8602e
+TAGS = test-keys
+TIME = 1568009343000
+TYPE = userdebug
+UNKNOWN = unknown
+USER = hra_xzy
+XUNHU_DELETE_ERROR_DIALOG = unknown
+XUNHU_IS_NO_ERROR_DIALOG = false

@@ -1,0 +1,396 @@
+package com.lys.servlet;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.lys.config.Config;
+import com.lys.protobuf.SBoardConfig;
+import com.lys.protobuf.SBoardPhoto;
+import com.lys.protobuf.SErrorCode;
+import com.lys.protobuf.SNotePage;
+import com.lys.protobuf.SNotePageSet;
+import com.lys.protobuf.SPTask;
+import com.lys.servlet.process.ProcessTask;
+import com.lys.utils.FsUtils;
+import com.lys.utils.LOG;
+import com.lys.utils.SVNManager;
+import com.lys.utils.SVNManager.SvnTaskResult;
+import com.lys.utils.TextUtils;
+
+@WebServlet("/task2")
+public class task2 extends HttpServlet
+{
+	private static final Object lock = new Object();
+
+	private static final long serialVersionUID = 1L;
+
+	public task2()
+	{
+		super();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		synchronized (lock)
+		{
+			process(request, response);
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		synchronized (lock)
+		{
+			process(request, response);
+		}
+	}
+
+	public static void result(HttpServletResponse response, JSONObject json)
+	{
+		LOG.v("result:-----------------");
+//		LOGJson.log(json.toString());
+		try
+		{
+			PrintWriter pw = response.getWriter();
+			pw.print(json.toString());
+			pw.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+//	public static void success(HttpServletResponse response, SNotePage page, SBoardConfig board)
+//	{
+//		JSONObject json = new JSONObject(true);
+//		json.put("code", 200);
+//		json.put("page", page.saveToJson());
+//		json.put("board", board.saveToJson());
+//		result(response, json);
+//	}
+
+	public static void error(HttpServletResponse response, int errorCode, String errorMsg)
+	{
+		JSONObject json = new JSONObject(true);
+		json.put("code", errorCode);
+		json.put("msg", errorMsg);
+		result(response, json);
+	}
+
+	private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+
+//		String userId = request.getParameter("userId");
+		String id = request.getParameter("id");
+		String pageDir = request.getParameter("page");
+
+		String UA = request.getHeader("user-agent");
+
+		LOG.v("request:-----------------");
+//		LOG.v("userId : " + userId);
+		LOG.v("id : " + id);
+		LOG.v("pageDir : " + pageDir);
+		LOG.v("UA : " + UA);
+
+		if (true)
+		{
+			SPTask task = null;
+			try
+			{
+				task = ProcessTask.selectTask(id);
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+			if (task != null)
+			{
+				String userId = task.userId;
+				SvnTaskResult result = SVNManager.updateTask(false, userId, id);
+				if (result.resultCode == SVNManager.ResultCode_Success)
+				{
+					File taskDir = SVNManager.getTaskDir(userId, id);
+					if (taskDir.exists())
+					{
+						File pagesetFile = new File(taskDir, "pageset.json");
+						if (pagesetFile.exists())
+						{
+
+							SNotePageSet pageset = SNotePageSet.load(FsUtils.readText(pagesetFile));
+
+							JSONObject json = new JSONObject(true);
+							json.put("code", 200);
+							json.put("userId", userId);
+							json.put("id", id);
+							json.put("urlRoot", Config.getUrlRoot() + "/lys.tasks");
+							json.put("name", task.name);
+							json.put("count", pageset.pages.size());
+
+							JSONArray pageDatas = new JSONArray();
+							json.put("pageDatas", pageDatas);
+
+							if (!TextUtils.isEmpty(pageDir))
+							{
+								json.put("singlePage", true);
+								Integer index = null;
+								for (int i = 0; i < pageset.pages.size(); i++)
+								{
+									SNotePage page = pageset.pages.get(i);
+									if (page.pageDir.equals(pageDir))
+									{
+										index = i;
+										break;
+									}
+								}
+								if (index != null)
+								{
+									SNotePage page = pageset.pages.get(index);
+
+									if (index - 1 >= 0)
+										json.put("prevPage", pageset.pages.get(index - 1).pageDir);
+
+									if (index + 1 < pageset.pages.size())
+										json.put("nextPage", pageset.pages.get(index + 1).pageDir);
+
+									File dir = new File(taskDir, page.pageDir);
+									if (dir.exists())
+									{
+										File boardFile = new File(dir, "board.json");
+										if (boardFile.exists())
+										{
+											SBoardConfig board = SBoardConfig.load(FsUtils.readText(boardFile));
+
+											JSONObject pageData = new JSONObject(true);
+											pageData.put("index", index);
+											pageData.put("hasBigVideo", new File(dir, "big_video.mp4").exists());
+											pageData.put("hasBoard", new File(dir, "board.png").exists());
+											pageData.put("page", page.saveToJson());
+											pageData.put("board", board.saveToJson());
+											pageDatas.add(pageData);
+
+										}
+										else
+										{
+											error(response, SErrorCode.unknown_error, boardFile + " not exists");
+											return;
+										}
+									}
+									else
+									{
+										error(response, SErrorCode.unknown_error, dir + " not exists");
+										return;
+									}
+								}
+								else
+								{
+									error(response, SErrorCode.unknown_error, pageDir + " not exists");
+									return;
+								}
+							}
+							else
+							{
+								json.put("singlePage", false);
+								for (int i = 0; i < pageset.pages.size(); i++)
+								{
+									SNotePage page = pageset.pages.get(i);
+
+									File dir = new File(taskDir, page.pageDir);
+									if (dir.exists())
+									{
+										File boardFile = new File(dir, "board.json");
+										if (boardFile.exists())
+										{
+											SBoardConfig board = SBoardConfig.load(FsUtils.readText(boardFile));
+
+											JSONObject pageData = new JSONObject(true);
+											pageData.put("index", i);
+											pageData.put("hasBigVideo", new File(dir, "big_video.mp4").exists());
+											pageData.put("hasBoard", new File(dir, "board.png").exists());
+											pageData.put("page", page.saveToJson());
+											pageData.put("board", board.saveToJson());
+											pageDatas.add(pageData);
+
+										}
+										else
+										{
+											error(response, SErrorCode.unknown_error, boardFile + " not exists");
+											return;
+										}
+									}
+									else
+									{
+										error(response, SErrorCode.unknown_error, dir + " not exists");
+										return;
+									}
+								}
+							}
+
+							result(response, json);
+
+						}
+						else
+						{
+							error(response, SErrorCode.unknown_error, pagesetFile + " not exists");
+						}
+					}
+					else
+					{
+						error(response, SErrorCode.unknown_error, taskDir + " not exists");
+					}
+				}
+				else
+				{
+					error(response, SErrorCode.unknown_error, result.resultCode + " : " + result.errorMsg);
+				}
+			}
+			else
+			{
+				error(response, SErrorCode.unknown_error, "未找到该任务");
+			}
+		}
+		else
+		{
+//			response.setContentType("text/html");
+//
+//			PrintWriter out = response.getWriter();
+//
+//			out.println("<!DOCTYPE html>");
+//			out.println("<html>");
+//			out.println("<head>");
+//
+//			out.println("<meta charset='UTF-8'>");
+//			out.println(String.format("<title>%s@%s[%s]</title>", userId, id, index));
+//
+//			out.println("<script src='https://code.jquery.com/jquery-3.4.1.min.js'></script>");
+//			out.println("<script src='lys.tasks/task.js'></script>");
+//
+//			out.println("<style type='text/css'>");
+//			out.println(".abs_pos {");
+//			out.println("	position: absolute;");
+//			out.println("}");
+//			out.println("</style>");
+//
+//			out.println("</head>");
+//			out.println("<body>");
+//
+//			SvnTaskResult result = SVNManager.updateTask(userId, id);
+//			if (result.resultCode == SVNManager.ResultCode_Success)
+//			{
+//				File taskDir = SVNManager.getTaskDir(userId, id);
+//				if (taskDir.exists())
+//				{
+//					File file = new File(taskDir, "pageset.json");
+//					if (file.exists())
+//					{
+//						SNotePageSet pageset = SNotePageSet.load(FsUtils.readText(file));
+//						if (index >= 0 && index < pageset.pages.size())
+//						{
+//							showPage(UA, userId, id, out, taskDir, pageset, index);
+//						}
+//						else
+//						{
+//							out.println(index + " out of " + pageset.pages.size());
+//						}
+//					}
+//					else
+//					{
+//						out.println(file + " not exists");
+//					}
+//				}
+//				else
+//				{
+//					out.println(taskDir + " not exists");
+//				}
+//			}
+//			else
+//			{
+//				out.println(result.resultCode + " : " + result.errorMsg);
+//			}
+//
+//			out.println("</body>");
+//			out.println("</html>");
+//
+//			out.close();
+		}
+
+	}
+
+	public static final int Type_Photo = 0;
+	public static final int Type_Video = 1;
+	public static final int Type_Topic = 2;
+	public static final int Type_SelectionGroup = 3;
+
+	private int pos(String UA, float pos)
+	{
+		if (UA.contains("Windows"))
+		{
+			return (int) (pos * 0.6);
+		}
+		else
+		{
+			return (int) pos;
+		}
+	}
+
+	private void showPage(String UA, String userId, String id, PrintWriter out, File taskDir, SNotePageSet pageset, Integer index)
+	{
+		SNotePage page = pageset.pages.get(index);
+		File dir = new File(taskDir, page.pageDir);
+		if (dir.exists())
+		{
+			File file = new File(dir, "board.json");
+			if (file.exists())
+			{
+				SBoardConfig board = SBoardConfig.load(FsUtils.readText(file));
+				out.println(String.format("<div class='abs_pos' id='content' style='border: 10px solid blue; left: 20%; top: 100px; width: 60%; height: 10px;'>"));
+
+//				out.println(String.format("<div class='abs_pos' id='container' style='border: 1px solid blue; left: 0px; top: 0px; width: %spx; height: %spx;'>", 1920, board.height));
+
+				for (SBoardPhoto photo : board.photos)
+				{
+					if (photo.type == Type_Photo)
+					{
+//						out.println(String.format("<img class='abs_pos' style='border: 1px solid red; left: %spx; top: %spx; width: %spx; height: %spx;' src='lys.tasks\\%s\\%s\\%s\\%s.png'>", photo.x, photo.y, photo.width, photo.height, userId, id, page.pageDir, photo.name));
+					}
+					else if (photo.type == Type_Video)
+					{
+					}
+					else if (photo.type == Type_Topic)
+					{
+					}
+					else if (photo.type == Type_SelectionGroup)
+					{
+
+					}
+				}
+
+//				out.println(String.format("</div>"));
+
+//				out.println(String.format("<img class='abs_pos' id='board' style='pointer-events: none; border: 1px solid red; left: 0px; top: 0px; width: %spx; height: %spx;' src='lys.tasks\\%s\\%s\\%s\\board.png'>", 1920, board.height, userId, id, page.pageDir));
+
+				out.println(String.format("</div>"));
+			}
+			else
+			{
+				out.println(file + " not exists");
+			}
+		}
+		else
+		{
+			out.println(dir + " not exists");
+		}
+	}
+
+}

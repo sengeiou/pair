@@ -1,0 +1,22 @@
+[
+	{
+		"name":"选择题",
+		"isSelect":"true"
+	},
+	{
+		"name":"计算题",
+		"isSelect":"false"
+	},
+	{
+		"name":"填空题",
+		"isSelect":"false"
+	},
+	{
+		"name":"解答题",
+		"isSelect":"false"
+	},
+	{
+		"name":"判断题",
+		"isSelect":"true"
+	}
+]

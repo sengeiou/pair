@@ -1,0 +1,52 @@
+mysql -h localhost -u root -pflyint8 pair
+mysql -h 39.104.58.109 -u root -pDispress_8 pair
+
+
+alter table t_tap change tap_counter tap_startup_counter int default 0;
+alter table t_tap add tap_check_counter int default 0 after tap_startup_counter;
+
+
+显示当前用户
+select user();
+
+显示所有数据库
+show databases;
+显示当前数据库
+select database();
+创建数据库
+create database if not exists pair_backup character set utf8;
+切换数据库
+use pair;
+删除数据库
+drop database if exists pair;
+
+显示表结构
+desc user;
+显示所有表
+show tables;
+删除表
+drop table if exists user;
+
+
+
+
+备份数据库到文件
+mysqldump -h localhost -u root -pflyint8 pair > bkdb_pair.txt
+mysqldump -h 39.104.58.109 -u root -pDispress_8 pair > bkdb_pair.txt
+
+
+从文件恢复数据库
+mysql -h localhost -u root -pflyint8 pair < bkdb_pair.txt
+mysql -h 39.104.58.109 -u root -pDispress_8 pair < bkdb_pair.txt
+
+
+数据库拷贝
+mysqldump -h 39.104.58.109 -u root -pDispress_8 pair | mysql -h localhost -u root -pflyint8 pair_backup
+mysqldump -h localhost -u root -pflyint8 pair | mysql -h 39.104.58.109 -u root -pDispress_8 pair
+
+
+
+
+
+
+

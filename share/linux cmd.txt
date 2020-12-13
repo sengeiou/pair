@@ -1,0 +1,47 @@
+﻿keytool -v -list -keystore C:\wangzhiting\work\code\client\as3\apk\learneasy.jks
+
+/zjyk/apache-tomcat-8.5.43/bin/shutdown.sh
+/zjyk/apache-tomcat-8.5.43/bin/startup.sh
+
+/zjyk/apache-tomcat-8.5.43/logs/
+
+/zjyk/apache-tomcat-8.5.43/webapps/ROOT/
+
+
+cd /zjyk/apache-tomcat-8.5.43/webapps/ROOT/files/pair/
+rm -rf lys.tasks
+
+tail -f /zjyk/apache-tomcat-8.5.43/logs/catalina.out
+
+
+
+
+
+查看内存使用情况
+free -h
+
+删除文件夹
+rm -rf xxxx
+
+yum install zip
+yum install unzip
+
+unzip all.zip
+unzip all.zip -d all
+
+zip -r hy.zip hy
+
+
+tar -zxvf jdk-8u144-linux-x64.tar.gz
+
+
+
+/home/apache-tomcat-8.5.43/bin/shutdown.sh
+/home/apache-tomcat-8.5.43/bin/startup.sh
+
+
+
+
+
+
+

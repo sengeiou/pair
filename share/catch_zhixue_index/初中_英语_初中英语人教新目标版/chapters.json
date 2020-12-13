@@ -1,0 +1,263 @@
+{
+	"chapters":
+	[
+		{
+			"index":"1",
+			"name":"七年级上册",
+			"chapters":
+			[
+				{
+					"index":"2",
+					"name":"Unit 1 My name's Gina."
+				},
+				{
+					"index":"3",
+					"name":"Unit 2 This is my sister."
+				},
+				{
+					"index":"4",
+					"name":"Unit 3 Is this your pencil?"
+				},
+				{
+					"index":"5",
+					"name":"Unit 4 Where's my schoolbag?"
+				},
+				{
+					"index":"6",
+					"name":"Unit 5 Do you have a soccer ball?"
+				},
+				{
+					"index":"7",
+					"name":"Unit 6 Do you like bananas?"
+				},
+				{
+					"index":"8",
+					"name":"Unit 7 How much are these socks?"
+				},
+				{
+					"index":"9",
+					"name":"Unit 8 When is your birthday?"
+				},
+				{
+					"index":"10",
+					"name":"Unit 9 My favorite subject is science."
+				}
+			]
+		},
+		{
+			"index":"11",
+			"name":"七年级下册",
+			"chapters":
+			[
+				{
+					"index":"12",
+					"name":"Unit 1 Can you play the guitar?"
+				},
+				{
+					"index":"13",
+					"name":"Unit 2 What time do you go to school?"
+				},
+				{
+					"index":"14",
+					"name":"Unit 3 How do you get to school?"
+				},
+				{
+					"index":"15",
+					"name":"Unit 4 Don't eat in class."
+				},
+				{
+					"index":"16",
+					"name":"Unit 5 Why do you like pandas?"
+				},
+				{
+					"index":"17",
+					"name":"Unit 6 I'm watching TV."
+				},
+				{
+					"index":"18",
+					"name":"Unit 7 It's raining!"
+				},
+				{
+					"index":"19",
+					"name":"Unit 8 Is there a post office near here?"
+				},
+				{
+					"index":"20",
+					"name":"Unit 9 What does he look like?"
+				},
+				{
+					"index":"21",
+					"name":"Unit 10 I'd like some noodles."
+				},
+				{
+					"index":"22",
+					"name":"Unit 11 How was your school trip?"
+				},
+				{
+					"index":"23",
+					"name":"Unit 12 What did you do last weekend?"
+				}
+			]
+		},
+		{
+			"index":"24",
+			"name":"八年级上册",
+			"chapters":
+			[
+				{
+					"index":"25",
+					"name":"Unit 1 Where did you go on vacation?"
+				},
+				{
+					"index":"26",
+					"name":"Unit 2 How often do you exercise?"
+				},
+				{
+					"index":"27",
+					"name":"Unit 3 I'm more outgoing than my sister"
+				},
+				{
+					"index":"28",
+					"name":"Unit 4 What's the best movie theater?"
+				},
+				{
+					"index":"29",
+					"name":"Unit 5 Do you want to watch a game show?"
+				},
+				{
+					"index":"30",
+					"name":"Unit 6 I'm going to study computer science."
+				},
+				{
+					"index":"31",
+					"name":"Unit 7 Will people have robots?"
+				},
+				{
+					"index":"32",
+					"name":"Unit 8 How do you make a banana milk shake?"
+				},
+				{
+					"index":"33",
+					"name":"Unit 9 Can you come to my party?"
+				},
+				{
+					"index":"34",
+					"name":"Unit 10 If you go to the party, you'll have a great time!"
+				}
+			]
+		},
+		{
+			"index":"35",
+			"name":"八年级下册",
+			"chapters":
+			[
+				{
+					"index":"36",
+					"name":"Unit 1 What's the matter?"
+				},
+				{
+					"index":"37",
+					"name":"Unit 2 I'll help to clean up the city parks."
+				},
+				{
+					"index":"38",
+					"name":"Unit 3 Could you please clean your room?"
+				},
+				{
+					"index":"39",
+					"name":"Unit 4 Why don't you talk to your parents?"
+				},
+				{
+					"index":"40",
+					"name":"Unit 5 What were you doing when the rainstorm came?"
+				},
+				{
+					"index":"41",
+					"name":"Unit 6 An old man tried to move the mountains."
+				},
+				{
+					"index":"42",
+					"name":"Unit 7 What's the highest mountain in the world?"
+				},
+				{
+					"index":"43",
+					"name":"Unit 8 Have you read Treasure Island yet?"
+				},
+				{
+					"index":"44",
+					"name":"Unit 9 Have you ever been to a museum?"
+				},
+				{
+					"index":"45",
+					"name":"Unit 10 I've had this bike for three years."
+				}
+			]
+		},
+		{
+			"index":"46",
+			"name":"九年级全一册",
+			"chapters":
+			[
+				{
+					"index":"47",
+					"name":"Unit 1 How can we become good learners?"
+				},
+				{
+					"index":"48",
+					"name":"Unit 2 I think that mooncakes are delicious!"
+				},
+				{
+					"index":"49",
+					"name":"Unit 3 Could you please tell me where the restrooms are?"
+				},
+				{
+					"index":"50",
+					"name":"Unit 4 I used to be afraid of the dark."
+				},
+				{
+					"index":"51",
+					"name":"Unit 5 What are the shirts made of?"
+				},
+				{
+					"index":"52",
+					"name":"Unit 6 When was it invented?"
+				},
+				{
+					"index":"53",
+					"name":"Unit 7 Teenagers should be allowed to choose their own clothes."
+				},
+				{
+					"index":"54",
+					"name":"Unit 8 It must belong to Carla."
+				},
+				{
+					"index":"55",
+					"name":"Unit 9 I like music that I can dance to."
+				},
+				{
+					"index":"56",
+					"name":"Unit 10 You're supposed to shake hands."
+				},
+				{
+					"index":"57",
+					"name":"Unit 11 Sad movies make me cry."
+				},
+				{
+					"index":"58",
+					"name":"Unit 12 Life is full of the unexpected."
+				},
+				{
+					"index":"59",
+					"name":"Unit 13 We're trying to save the earth!"
+				},
+				{
+					"index":"60",
+					"name":"Unit 14 I remember meeting all of you in Grade 7."
+				}
+			]
+		}
+	],
+	"phase":"初中",
+	"subject":"英语",
+	"material":"初中英语人教新目标版"
+}

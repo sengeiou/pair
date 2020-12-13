@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>云空间</title>
+<link rel="icon" href="img/img_water_a.png" type="image/x-icon">
+<!-- <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script> -->
+<script src='https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js'></script>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/spark-md5/3.0.0/spark-md5.min.js'></script>
+<script src='js/handleIds.js'></script>
+<script src='js/libs.js'></script>
+<script src='js/cloud.js'></script>
+</head>
+<body>
+	<div name="single" style="text-align: center;">
+		<A class=btn_addPic href="javascript:void(0);"> <SPAN>选择文件</SPAN> <input id="file" class="filePrew" type="file"
+			name="file" multiple="multiple" onchange="javascript:onc();" />
+		</A>
+	</div>
+	<div name="dropbox" id="dropbox"
+		style="font-size: 30px; color: #333333; background-color: #888888; min-width: 300px; min-height: 300px; border: 3px dashed silver;">
+		<p style="line-height: 300px; text-align: center;">拖拽文件上传</p>
+	</div>
+	<!-- <div style="text-align: center;">
+		<button class="button" type="submit" onclick="javascript:Upload();">上传</button>
+	</div> -->
+	<div id="fileliststring" style="background-color: #cccccc; color: #333333;"></div>
+</body>
+</html>

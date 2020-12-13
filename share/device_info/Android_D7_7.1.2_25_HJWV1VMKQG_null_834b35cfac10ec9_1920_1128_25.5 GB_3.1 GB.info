@@ -1,0 +1,43 @@
+屏幕大小：(1920, 1128)
+screenWidth(dp)：1280
+screenWidth(sp)：1280
+
+存储空间：总共：25.5 GB，剩余：23.8 GB
+内存：总共：3.1 GB，剩余：2.3 GB
+
+厂商：Android
+型号：D7
+版本号：HRA_rk3368H_64-user_UP15_D7B_3G_930_20190415_1452
+Android 版本：7.1.2
+SDK 版本：25
+Serial(设备号)：HJWV1VMKQG
+IMEI：null
+ANDROID_ID：834b35cfac10ec9
+
+BOARD = rk30sdk
+BOOTLOADER = unknown
+BRAND = Android
+CPU_ABI = arm64-v8a
+CPU_ABI2 = 
+DEVICE = rk3368H_64
+DISPLAY = HRA_rk3368H_64-user_UP15_D7B_3G_930_20190415_1452
+FINGERPRINT = Android/rk3368H_64/rk3368H_64:7.1.2/NHG47K/user.hra_ly.20190415.144733:user/release-keys
+HARDWARE = rk30board
+HOST = hra
+ID = NHG47K
+IS_DEBUGGABLE = false
+IS_EMULATOR = false
+MANUFACTURER = rockchip
+MODEL = D7
+PERMISSIONS_REVIEW_REQUIRED = false
+PRODUCT = rk3368H_64
+RADIO = unknown
+SERIAL = HJWV1VMKQG
+SUPPORTED_32_BIT_ABIS = [Ljava.lang.String;@ffa1785
+SUPPORTED_64_BIT_ABIS = [Ljava.lang.String;@684b9da
+SUPPORTED_ABIS = [Ljava.lang.String;@fbfbe0b
+TAGS = release-keys
+TIME = 1555310853000
+TYPE = user
+UNKNOWN = unknown
+USER = hra_ly

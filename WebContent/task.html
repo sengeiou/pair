@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>task</title>
+<link rel="icon" href="img/img_water_b.png" type="image/x-icon">
+<!-- <script src='https://code.jquery.com/jquery-3.4.1.min.js'></script> -->
+<script src='https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js'></script>
+<script src='js/handleIds.js'></script>
+<script src='js/libs.js'></script>
+<script src='js/task.js'></script>
+<style type='text/css'>
+.abs_pos {
+	position: absolute;
+}
+
+.fixed_pos {
+	position: fixed;
+}
+
+.rotate90 {
+	transform: rotate(90deg);
+}
+
+.content {
+	border: 0px solid red;
+}
+</style>
+</head>
+<body>
+	<div id='page' class='abs_pos' style='left: 0px; top: 0px; width: 100%; height: 100%;'>
+		<div id='message' class='abs_pos' style='top: 30px; width: 100%; text-align: center;'>加载中。。。</div>
+	</div>
+	<img id='nav_prev' class="fixed_pos" src="img/img_prev.png"
+		style="left: 0px; top: 0px; width: 56px; height: 100px; opacity: 0.4; display: none;">
+	<img id='nav_next' class="fixed_pos" src="img/img_next.png"
+		style="right: 0px; top: 0px; width: 56px; height: 100px; opacity: 0.4; display: none;">
+	<div id="outerdiv"
+		style="position: fixed; top: 0; left: 0; background: rgba(0, 0, 0, 0.5); z-index: 2; width: 100%; height: 100%; display: none;">
+		<div id="innerdiv" style="position: absolute;">
+			<img id="bigimg" style="border: 0px solid #f00; background: #fff;" src="" />
+		</div>
+	</div>
+</body>
+</html>

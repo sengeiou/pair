@@ -1,0 +1,33 @@
+C:\Users\xnktyu\AppData\Roaming\Scooter Software\Beyond Compare 3
+http://cat-pc:81/svn/zjyk/solr_home
+http://192.168.31.198:8080/pair/apk/com.lys.app.pair.zhixue_zhixue.apk
+
+http://192.168.31.171:81/svn/pair
+guest
+123456
+
+http://192.168.31.174:8080/pair/lys.tasks/task.html?userId=mst3&id=1512a0ce-365f-496a-a58c-853cbe81d22a&index=0
+
+svn://129.211.3.37/repository
+pip install pyautogui
+
+https://localhost:8443/svn/lys/solr_home
+
+http://192.168.31.90:81/svn/zjyk
+http://cat-PC:81/svn/zjyk/
+
+
+
+
+
+create database if not exists pair_tmp character set utf8;
+mysqldump -h localhost -u root -pflyint8 pair | mysql -h 39.104.58.109 -u root -pDispress_8 pair_tmp
+mysqldump -h 39.104.58.109 -u root -pDispress_8 pair_tmp | mysql -h localhost -u root -pflyint8 pair
+
+
+
+
+
+
+http://120.24.162.51:81/svn/board/lys.tasks
+http://192.168.31.28/pair/devicelist.html

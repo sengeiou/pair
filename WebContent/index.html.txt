@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>小翼伴学</title>
+</head>
+<body>
+	<button type="button" onclick="window.navigate('log.html');">运行日志</button>
+	<button type="button" onclick="window.navigate('state.html');">运行状态</button>
+	<button type="button" onclick="window.navigate('upload.html');">正在上传</button>
+	<button type="button" onclick="window.navigate('tasklist.html');">任务列表</button>
+	<button type="button" onclick="window.navigate('devicelist.html');">设备列表</button>
+</body>
+</html>

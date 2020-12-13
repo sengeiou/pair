@@ -1,0 +1,101 @@
+public static boolean process(File dir, boolean failCopy)
+	{
+		boolean success = true;
+		File[] files = dir.listFiles();
+		for (File file : files)
+		{
+			if (file.isFile() && file.getName().endsWith(".json"))
+			{
+//				if (!processImpl(file))
+//				{
+//					success = false;
+//					if (failCopy)
+//						copyToFail(file);
+//				}
+
+				String name = file.getName().substring(0, file.getName().lastIndexOf('.'));
+
+				File jsonFile = new File(file.getParentFile(), name + ".json");
+				File jsonRawFile = new File(file.getParentFile(), name + ".json.raw");
+				File htmlFile = new File(file.getParentFile(), name + ".html");
+				File topicImageDir = new File(jsonFile.getParentFile(), name);
+				File pngFile = new File(file.getParentFile(), name + ".png");
+
+				boolean flag = true;
+
+				if (!jsonFile.exists())
+				{
+					LOG.v("lose json : " + name);
+					flag = false;
+				}
+				if (!jsonRawFile.exists())
+				{
+					LOG.v("lose raw : " + name);
+					flag = false;
+				}
+				if (!htmlFile.exists())
+				{
+					LOG.v("lose html : " + name);
+					flag = false;
+				}
+				if (!topicImageDir.exists())
+				{
+					LOG.v("lose dir : " + name);
+					flag = false;
+				}
+				if (!pngFile.exists())
+				{
+					LOG.v("lose png : " + name);
+					flag = false;
+				}
+
+				if (flag == false)
+					LOG.e("---------");
+
+//				if (flag == false)
+//				{
+//					jsonFile.delete();
+//					jsonRawFile.delete();
+//					return false;
+//				}
+
+			}
+		}
+		return success;
+	}
+
+
+
+
+
+public static void main(String[] args)
+	{
+		StaticConfig.isTomcat = false;
+
+		final List<SZXAccount> accounts = new ArrayList<>();
+		DBHelper.select(T.zhixueAccount, new OnCallback()
+		{
+			@Override
+			public void onResult(ResultSet rs) throws SQLException
+			{
+				while (rs.next())
+				{
+					accounts.add(packSZXAccount(rs));
+				}
+			}
+		});
+
+		LOG.v("accounts size " + accounts.size());
+
+		for (SZXAccount account : accounts)
+		{
+			LOG.v("   " + account.state + "   " + account.deviceId);
+
+			if (account.state == null)
+				DBHelper.update(T.zhixueAccount, DBHelper.set(T.zhixueAccount.state, ""), T.zhixueAccount.account, account.account);
+
+		}
+
+		LOG.v("-------------------------------- process over --------------------------------");
+	}
+
